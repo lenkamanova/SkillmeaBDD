@@ -1,6 +1,7 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class KalkulackaTest {
 
@@ -24,6 +25,7 @@ public class KalkulackaTest {
 
     @Then("Uzivatel vidi na kalkulace vysledek {int}")
     public void uzivatelVidiNaKalkulaceVysledek(int predpokladanyVysledek) {
+        assertEquals(predpokladanyVysledek, vypoctenyVysledek);
 
     }
 }
