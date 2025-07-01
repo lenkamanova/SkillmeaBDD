@@ -2,6 +2,8 @@ import Product.BankAccount;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class BankTest {
     BankAccount firstBankAccount;
 
@@ -10,8 +12,8 @@ public class BankTest {
         firstBankAccount = new BankAccount(initialBalance);
     }
 
-    @Then("A user acount balance is {int} kc")
-    public void aUserAcountBalanceIsKc(int expectedBalance) {
-
+    @Then("A user account balance is {int} kc")
+    public void aUserAccountBalanceIsKc(int expectedBalance) {
+        assertEquals(expectedBalance, firstBankAccount.getAccountBalance());
     }
 }
