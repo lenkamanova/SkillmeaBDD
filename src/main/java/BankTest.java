@@ -7,7 +7,9 @@ import io.cucumber.java.en.When;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BankTest {
+
     BankAccount firstBankAccount;
+    BankAccount secondBankAccount;
 
     @Given("Bank account with {int} kc")
     public void bankAccountWithKc(int initialBalance) {
@@ -20,10 +22,28 @@ public class BankTest {
     }
 
     @When("A user withdraw {int} kc")
-    public void aUserWithdrawKc(int arg0) {
+    public void aUserWithdrawKc(int withdrawAmount) {
+        firstBankAccount.withdraw(withdrawAmount);
     }
 
     @And("A user transfer {int} kc to this account")
-    public void aUserTransferKcToThisAccount(int arg0) {
+    public void aUserTransferKcToThisAccount(int transferAmount) {
+        firstBankAccount.transfer(transferAmount);
+    }
+
+    @And("another Bank account with {int} kc")
+    public void anotherBankAccountWithKc(int intialBalance) {
+        secondBankAccount = new BankAccount(intialBalance);
+    }
+
+    @When("A user transfer from first account to second one {int} kc")
+    public void aUserTransferFromFirstAccountToSecondOneKc(int transferAmount) {
+        firstBankAccount.withdraw(transferAmount);
+        secondBankAccount.transfer(transferAmount);
+    }
+
+    @And("A user second account balance is {int} kc")
+    public void aUserSecondAccountBalanceIsKc(int expectedBalance) {
+        assertEquals(expectedBalance, secondBankAccount.getAccountBalance());
     }
 }
